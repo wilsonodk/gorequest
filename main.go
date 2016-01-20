@@ -705,7 +705,7 @@ func (s *SuperAgent) MakeRequest() (*http.Request, error) {
 	)
 
 	switch s.Method {
-	case POST, PUT, PATCH:
+	case POST, PUT, DELETE, PATCH:
 		if s.TargetType == "json" {
 			// If-case to give support to json array. we check if
 			// 1) Map only: send it as json map from s.Data
@@ -747,7 +747,7 @@ func (s *SuperAgent) MakeRequest() (*http.Request, error) {
 		} else {
 			// TODO: if nothing match, let's return warning here
 		}
-	case GET, HEAD, DELETE, OPTIONS:
+	case GET, HEAD, OPTIONS:
 		req, err = http.NewRequest(s.Method, s.Url, nil)
 		if err != nil {
 			return nil, err
